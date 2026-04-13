@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover, user-scalable=yes">
 <title>Mi Vida · TDAH</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,12 +35,16 @@
   --shadow: 0 4px 24px rgba(100,80,200,.10);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; width:100%; max-width:100%; overflow-x:hidden; -webkit-text-size-adjust:100%; }
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
+  width:100%;
+  max-width:100%;
   min-height: 100vh;
+  overflow-x:hidden;
+  touch-action: manipulation pinch-zoom;
   padding: 0 0 120px 0;
   padding-bottom: calc(120px + env(safe-area-inset-bottom));
 }
@@ -118,7 +122,7 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 .type-btn.active { border-color: var(--primary); color: var(--primary); background: var(--primary-dim); }
 
 /* LAYOUT */
-.main { width: 100%; max-width: 860px; margin: 0 auto; padding: 18px 16px; display: grid; gap: 18px; }
+.main { width: min(100%, 920px); max-width: 920px; margin: 0 auto; padding: 18px 16px; display: grid; gap: 18px; }
 .two-col { display: grid; grid-template-columns: 1.28fr 1fr; gap: 18px; align-items: start; }
 .card {
   background: var(--card); border: 1px solid var(--border);
@@ -127,6 +131,7 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 }
 .card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
 .card-sub { color: var(--muted); font-size: .85rem; margin-bottom: 16px; line-height: 1.4; }
+.hero-role { display:inline-flex; align-items:center; gap:6px; margin-top: 10px; padding: 6px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: .76rem; font-weight: 700; }
 .section-label {
   font-family: 'Syne', sans-serif; font-size: .7rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
@@ -367,7 +372,7 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 }
 @media (max-width: 540px) {
   body { padding-bottom: 100px; }
-  .main { max-width: 100%; padding: 14px 12px; gap: 14px; }
+  .main { width: 100%; max-width: 100%; padding: 14px 12px; gap: 14px; }
   .card { padding: 16px; }
   .week-grid { grid-template-columns: repeat(7,minmax(80px,1fr)); overflow-x: auto; }
   .hero-card { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
@@ -561,6 +566,46 @@ input[type="checkbox"] { cursor: pointer; }
 .swipe-edit-btn:hover { color: var(--primary); }
 
 
+
+
+/* RUTINAS RECURRENTES */
+.recurring-list { display:grid; gap:10px; }
+.recurring-item {
+  border: 1.5px solid var(--border); background: var(--bg2);
+  border-radius: var(--radius-sm); padding: 12px;
+}
+.recurring-head { display:flex; gap:10px; align-items:flex-start; }
+.recurring-main { flex:1; min-width:0; }
+.recurring-title { font-size: .92rem; font-weight: 700; line-height: 1.3; }
+.recurring-meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+.rec-chip {
+  font-size:.72rem; padding:3px 8px; border-radius:999px;
+  background: var(--card); color: var(--muted); border:1px solid var(--border);
+}
+.rec-chip.active { background: var(--primary-dim); color: var(--primary); border-color: var(--primary); }
+.rec-days { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.weekday-chip {
+  width:34px; height:34px; border-radius:10px; border:1.5px solid var(--border);
+  background:transparent; color:var(--muted); font:inherit; font-size:.8rem; font-weight:700;
+  cursor:pointer; transition:.15s;
+}
+.weekday-chip.active { background: var(--primary-dim); color: var(--primary); border-color: var(--primary); }
+.rec-form-grid { display:grid; gap:10px; }
+.rec-form-row { display:flex; gap:8px; flex-wrap:wrap; }
+.rec-input, .rec-select {
+  background: var(--bg2); border:1.5px solid var(--border); border-radius: var(--radius-sm);
+  padding:10px 12px; font:inherit; color:var(--text); outline:none;
+}
+.rec-input:focus, .rec-select:focus { border-color: var(--primary); }
+.rec-time { width:88px; font-family:'Syne', sans-serif; font-weight:700; }
+.rec-name { flex:1; min-width:180px; }
+.rec-actions { display:flex; gap:8px; align-items:center; margin-left:auto; }
+.rec-inline-days { display:flex; gap:5px; flex-wrap:wrap; }
+.rec-day-mini {
+  min-width:24px; height:24px; padding:0 6px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+  background: var(--card); color: var(--muted); border:1px solid var(--border); font-size:.68rem; font-weight:700;
+}
+
 .date-chip {
   padding: 7px 13px; border-radius: 999px;
   border: 1.5px solid var(--border); background: transparent;
@@ -598,6 +643,7 @@ input[type="checkbox"] { cursor: pointer; }
     <div>
       <div class="hero-greeting">Hola 👋<br><span id="heroDay">hoy</span></div>
       <div class="hero-sub" id="heroSub">Cargando tu resumen del día...</div>
+      <div class="hero-role" id="heroRole">Cargando tipo de día...</div>
       <div class="hero-stats">
         <div class="hstat"><div class="hstat-num" id="heroDone">0</div><div class="hstat-label">hechos hoy</div></div>
         <div class="hstat"><div class="hstat-num" id="heroStreak">0</div><div class="hstat-label">días med.</div></div>
@@ -668,17 +714,22 @@ input[type="checkbox"] { cursor: pointer; }
         </div>
       </div>
 
-      <!-- SEMANA -->
+      <!-- EDITAR SEMANA -->
       <div class="card">
-        <div class="section-toggle" onclick="toggleSection('weekSection', 'weekArrow')">
+        <div class="section-toggle" onclick="toggleSection('recurringSection', 'recurringArrow')">
           <div>
-            <div class="card-title">📅 Semana completa</div>
-            <div class="card-sub">Vista global — tocá para marcar tareas.</div>
+            <div class="card-title">✏️ Editar semana</div>
+            <div class="card-sub">Toda la semana es editable. Cada actividad tiene hora de inicio, término, nombre y tipo.</div>
           </div>
-          <span class="toggle-arrow" id="weekArrow">▸</span>
+          <span class="toggle-arrow" id="recurringArrow">▸</span>
         </div>
-        <div class="collapsible hidden" id="weekSection" style="max-height:0;opacity:0;">
-          <div class="week-grid" id="weekGrid"></div>
+        <div class="collapsible hidden" id="recurringSection" style="max-height:0;opacity:0;">
+          <div class="card-sub" style="margin-bottom:12px;">Usa el editor para agregar, quitar, ordenar y cambiar horarios en tramos de 30 minutos. Lo que edites aquí se refleja en tu día y en tu semana.</div>
+          <div class="btn-row" style="margin-bottom:14px;">
+            <button class="btn btn-primary" onclick="openEditModal(todayIdx())">Editar hoy</button>
+            <button class="btn btn-soft" onclick="openEditModal(0)">Editar semana</button>
+          </div>
+          <div id="weekEditorQuickNav" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
         </div>
       </div>
 
@@ -845,7 +896,8 @@ input[type="checkbox"] { cursor: pointer; }
     <div class="edit-add-row">
       <div class="section-label" style="margin-bottom:4px;">➕ Agregar bloque</div>
       <div class="edit-add-fields">
-        <input class="edit-new-time" id="editNewTime" placeholder="09:00" maxlength="5">
+        <select class="edit-new-time" id="editNewStart"></select>
+        <select class="edit-new-time" id="editNewEnd"></select>
         <input class="edit-new-name" id="editNewName" placeholder="Nombre del bloque...">
         <select class="edit-tag-sel" id="editNewTag">
           <option value="">sin tag</option>
@@ -867,66 +919,148 @@ const DAYS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Doming
 const DAYS_SHORT = ['L','M','X','J','V','S','D'];
 
 const ROUTINES = [
-  [ // Lunes
-    {time:'07:30', name:'Despertar y rutina suave', tag:''},
-    {time:'08:30', name:'💊 Samexid', tag:'med'},
-    {time:'08:40', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'09:00', name:'Bloque foco principal — trabajo', tag:'focus'},
-    {time:'13:30', name:'Trabajo liviano / emails', tag:''},
-    {time:'17:30', name:'🏃 Movimiento extra', tag:'move'},
+  [ // 🔵 Lunes — vínculo
+    {start:'07:30', end:'08:00', name:'Rutina suave', tag:''},
+    {start:'08:30', end:'09:00', name:'💊 Samexid + activación suave', tag:'med'},
+    {start:'09:00', end:'09:30', name:'🐶 Paseo perro', tag:'move'},
+    {start:'10:00', end:'12:00', name:'Trabajo liviano (opcional)', tag:''},
+    {start:'19:00', end:'21:00', name:'❤️ Tiempo con pareja', tag:'mental'},
   ],
-  [ // Martes
-    {time:'07:30', name:'Despertar y rutina suave', tag:''},
-    {time:'08:30', name:'💊 Samexid', tag:'med'},
-    {time:'08:40', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'09:00', name:'Bloque foco principal — trabajo', tag:'focus'},
-    {time:'13:30', name:'Trabajo liviano / emails', tag:''},
-    {time:'17:00', name:'Terapia de pareja', tag:'mental'},
-    {time:'18:30', name:'🐶 Paseo corto', tag:'move'},
+  [ // 🔴 Martes — foco trabajo
+    {start:'07:30', end:'08:00', name:'Rutina', tag:''},
+    {start:'08:30', end:'09:00', name:'💊 Samexid + activación', tag:'med'},
+    {start:'09:00', end:'09:30', name:'🐶 Paseo', tag:'move'},
+    {start:'09:30', end:'11:30', name:'Foco trabajo', tag:'focus'},
+    {start:'12:00', end:'14:00', name:'Foco trabajo', tag:'focus'},
+    {start:'15:00', end:'16:30', name:'Trabajo liviano', tag:''},
+    {start:'17:30', end:'18:00', name:'🐶 Paseo', tag:'move'},
+    {start:'18:00', end:'18:30', name:'🏠 Casa', tag:''},
   ],
-  [ // Miércoles
-    {time:'07:30', name:'Despertar y rutina suave', tag:''},
-    {time:'08:30', name:'💊 Samexid', tag:'med'},
-    {time:'08:40', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'09:00', name:'Estudio fuerte — bloque largo', tag:'focus'},
-    {time:'12:00', name:'🧠 Psicóloga', tag:'mental'},
-    {time:'14:00', name:'Estudio liviano', tag:''},
-    {time:'17:00', name:'🐶 Paseo largo', tag:'move'},
+  [ // 🟣 Miércoles — estudio + terapia
+    {start:'07:30', end:'08:00', name:'Rutina', tag:''},
+    {start:'08:30', end:'09:00', name:'💊 Samexid + activación', tag:'med'},
+    {start:'09:00', end:'09:30', name:'🐶 Paseo', tag:'move'},
+    {start:'09:30', end:'11:30', name:'📚 Estudio fuerte', tag:'study'},
+    {start:'12:00', end:'13:00', name:'🧠 Terapia', tag:'mental'},
+    {start:'15:00', end:'17:00', name:'📚 Estudio liviano', tag:'study'},
+    {start:'17:00', end:'17:30', name:'🐶 Paseo', tag:'move'},
   ],
-  [ // Jueves
-    {time:'07:30', name:'Despertar y rutina suave', tag:''},
-    {time:'08:30', name:'💊 Samexid', tag:'med'},
-    {time:'08:40', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'09:00', name:'Bloque foco principal — trabajo', tag:'focus'},
-    {time:'13:30', name:'Trabajo liviano', tag:''},
-    {time:'17:00', name:'Bajar revoluciones', tag:''},
-    {time:'20:00', name:'Clase', tag:'study'},
-    {time:'22:00', name:'Cierre del día', tag:''},
+  [ // 🟡 Jueves — mixto + clase
+    {start:'07:30', end:'08:00', name:'Rutina', tag:''},
+    {start:'08:30', end:'09:00', name:'💊 Samexid + activación', tag:'med'},
+    {start:'09:00', end:'09:30', name:'🐶 Paseo', tag:'move'},
+    {start:'09:30', end:'11:30', name:'Trabajo liviano', tag:''},
+    {start:'13:30', end:'15:00', name:'Trabajo liviano', tag:''},
+    {start:'20:00', end:'22:00', name:'🎓 Clase', tag:'study'},
   ],
-  [ // Viernes
-    {time:'07:30', name:'Despertar y rutina suave', tag:''},
-    {time:'08:30', name:'💊 Samexid', tag:'med'},
-    {time:'08:40', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'09:00', name:'Cerrar trabajo importante', tag:'focus'},
-    {time:'13:30', name:'Trabajo liviano', tag:''},
-    {time:'17:00', name:'🐶 Paseo', tag:'move'},
-    {time:'20:00', name:'Noche social libre', tag:''},
+  [ // 🔴 Viernes — cierre + arte + social
+    {start:'07:30', end:'08:00', name:'Rutina', tag:''},
+    {start:'08:30', end:'09:00', name:'💊 Samexid + activación', tag:'med'},
+    {start:'09:00', end:'09:30', name:'🐶 Paseo', tag:'move'},
+    {start:'09:30', end:'11:30', name:'Foco trabajo (cierre)', tag:'focus'},
+    {start:'12:00', end:'13:00', name:'Pendientes finales', tag:''},
+    {start:'17:00', end:'17:30', name:'🐶 Paseo', tag:'move'},
+    {start:'17:30', end:'19:00', name:'🎨 Arte / creatividad', tag:'mental'},
+    {start:'21:00', end:'23:00', name:'🎉 Social / salida', tag:''},
   ],
-  [ // Sábado
-    {time:'', name:'Mañana suave — sin alarma', tag:''},
-    {time:'', name:'2 bloques de estudio', tag:'study'},
-    {time:'', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'', name:'Tarde libre / panorama', tag:''},
+  [ // 🟢 Sábado — estudio + arte + vida
+    {start:'10:00', end:'12:00', name:'📚 Estudio', tag:'study'},
+    {start:'12:30', end:'14:30', name:'📚 Estudio', tag:'study'},
+    {start:'16:00', end:'16:30', name:'🐶 Paseo', tag:'move'},
+    {start:'17:00', end:'19:00', name:'🎨 Arte / creatividad', tag:'mental'},
+    {start:'19:00', end:'19:30', name:'🏠 Casa', tag:''},
+    {start:'21:00', end:'23:00', name:'🎉 Social opcional', tag:''},
   ],
-  [ // Domingo
-    {time:'', name:'🐶 Paseo con tu perro', tag:'move'},
-    {time:'', name:'Ordenar la semana que viene', tag:''},
-    {time:'', name:'Descanso real', tag:''},
-    {time:'', name:'Recuperación sin culpa', tag:''},
-  ],
+  [ // ⚪ Domingo — recuperación
+    {start:'10:00', end:'10:30', name:'🐶 Paseo', tag:'move'},
+    {start:'12:00', end:'12:30', name:'🧠 Planificar semana', tag:'mental'},
+    {start:'17:00', end:'19:00', name:'Descanso real', tag:''},
+  ]
 ];
 
-const KEY = 'mivida-tdah-v1';
+const DAY_TYPES = ['vinculo','foco','estudio','mixto','cierre','vida','reset'];
+const DAY_TYPE_LABELS = {
+  vinculo:'🔵 Día vínculo',
+  foco:'🔴 Día foco trabajo',
+  estudio:'🟣 Día estudio',
+  mixto:'🟡 Día mixto',
+  cierre:'🔴 Día cierre',
+  vida:'🟢 Día vida + creatividad',
+  reset:'⚪ Día recuperación'
+};
+
+const KEY = 'mivida-tdah-v2';
+const ROUTINE_TEMPLATE_VERSION = '2026-04-13-time-ranges-v1';
+
+const HALF_HOUR_OPTIONS = Array.from({length: 48}, (_, i) => {
+  const h = String(Math.floor(i / 2)).padStart(2,'0');
+  const m = i % 2 === 0 ? '00' : '30';
+  return `${h}:${m}`;
+});
+
+function timeToMins(t) {
+  if (!t || typeof t !== 'string' || !t.includes(':')) return 0;
+  const [hh, mm] = t.split(':').map(Number);
+  return hh * 60 + mm;
+}
+function minsToTime(mins) {
+  const safe = Math.max(0, Math.min(1410, mins));
+  const hh = String(Math.floor(safe / 60)).padStart(2,'0');
+  const mm = String(safe % 60).padStart(2,'0');
+  return `${hh}:${mm}`;
+}
+function nextHalfHour(t) {
+  const mins = timeToMins(t) + 30;
+  return minsToTime(mins);
+}
+function normalizeRoutineItem(item) {
+  if (!item) return { start:'09:00', end:'09:30', name:'', tag:'' };
+  if (item.start && item.end) return { start:item.start, end:item.end, name:item.name || '', tag:item.tag || '' };
+  const start = item.time && item.time.includes(':') ? item.time : '09:00';
+  const end = nextHalfHour(start);
+  return { start, end, name:item.name || '', tag:item.tag || '' };
+}
+function normalizeAllRoutines(routines) {
+  return (routines || ROUTINES).map(day => day.map(normalizeRoutineItem).sort((a,b) => timeToMins(a.start) - timeToMins(b.start)));
+}
+function ensureChecksMatch() {
+  state.routines.forEach((day, i) => {
+    if (!state.dailyChecks[i]) state.dailyChecks[i] = day.map(() => false);
+    while (state.dailyChecks[i].length < day.length) state.dailyChecks[i].push(false);
+    while (state.dailyChecks[i].length > day.length) state.dailyChecks[i].pop();
+  });
+}
+function formatRange(item) {
+  if (!item?.start) return '—';
+  return `${item.start}–${item.end}`;
+}
+function isCurrentItem(item, h) {
+  if (!item?.start || !item?.end) return false;
+  const start = timeToMins(item.start) / 60;
+  const end = timeToMins(item.end) / 60;
+  return h >= start && h < end;
+}
+function sortDay(dayIdx) {
+  const combined = state.routines[dayIdx].map((r, i) => ({ r: normalizeRoutineItem(r), c: state.dailyChecks[dayIdx][i] ?? false }));
+  combined.sort((a, b) => timeToMins(a.r.start) - timeToMins(b.r.start));
+  state.routines[dayIdx] = combined.map(x => x.r);
+  state.dailyChecks[dayIdx] = combined.map(x => x.c);
+}
+function timeOptionsHtml(selected) {
+  return HALF_HOUR_OPTIONS.map(t => `<option value="${t}" ${t === selected ? 'selected' : ''}>${t}</option>`).join('');
+}
+function renderWeekEditorQuickNav() {
+  const wrap = document.getElementById('weekEditorQuickNav');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  DAYS.forEach((name, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'edit-day-tab';
+    btn.textContent = name;
+    btn.onclick = () => openEditModal(i);
+    wrap.appendChild(btn);
+  });
+}
 
 function defaultState() {
   return {
@@ -945,12 +1079,13 @@ function defaultState() {
     timerRunning: false,
     timerDuration: 25,
     weeklyCollapsed: {
-      weekSection: true,
+      timelineSection: false,
+      recurringSection: true,
       medSection: true,
       moveSection: true,
-      tasksSection: true,
-      timelineSection: false
+      tasksSection: true
     },
+    routineTemplateVersion: ROUTINE_TEMPLATE_VERSION,
   };
 }
 
@@ -964,11 +1099,18 @@ function loadState() {
     if (!s) return defaultState();
     const d = defaultState();
     const merged = {...d, ...s, tasks: s.tasks || d.tasks};
-    if (!merged.routines) merged.routines = JSON.parse(JSON.stringify(ROUTINES));
-    // Ensure dailyChecks length matches routines
+    merged.routines = normalizeAllRoutines(merged.routines || ROUTINES);
+    merged.dailyChecks = Array.isArray(merged.dailyChecks) ? merged.dailyChecks : d.dailyChecks;
+    if (!merged.weeklyCollapsed) merged.weeklyCollapsed = d.weeklyCollapsed;
+    if (merged.routineTemplateVersion !== ROUTINE_TEMPLATE_VERSION) {
+      merged.routines = JSON.parse(JSON.stringify(ROUTINES));
+      merged.dailyChecks = ROUTINES.map(d => d.map(() => false));
+      merged.routineTemplateVersion = ROUTINE_TEMPLATE_VERSION;
+    }
     merged.routines.forEach((day, i) => {
       if (!merged.dailyChecks[i]) merged.dailyChecks[i] = day.map(() => false);
       while (merged.dailyChecks[i].length < day.length) merged.dailyChecks[i].push(false);
+      while (merged.dailyChecks[i].length > day.length) merged.dailyChecks[i].pop();
     });
     return merged;
   } catch(e) { return defaultState(); }
@@ -1091,10 +1233,11 @@ function updateHero() {
   const h = nowHour();
   let sub = '';
   if (!state.medDays[idx]) sub = '⚠️ Todavía no marcaste el medicamento de hoy.';
-  else if (h >= 9 && h < 13) sub = '🔥 Ventana de foco activa — hacé lo más difícil ahora.';
+  else if (h >= 9 && h < 13 && (DAY_TYPES[idx] === 'foco' || DAY_TYPES[idx] === 'estudio' || DAY_TYPES[idx] === 'cierre')) sub = '🔥 Ventana de foco activa — este es el bloque más valioso del día.';
   else if (done === 0) sub = 'Empezá con algo pequeño. Solo una cosa.';
-  else sub = done + ' cosas hechas hoy. ¡Eso cuenta!';
+  else sub = done + ' cosas hechas hoy. Eso ya cuenta.';
   document.getElementById('heroSub').textContent = sub;
+  document.getElementById('heroRole').textContent = DAY_TYPE_LABELS[DAY_TYPES[idx]] || 'Tu día';
 }
 
 // ===================== TIMELINE =====================
@@ -1125,15 +1268,13 @@ function renderTimeline() {
     const isMed = item.tag === 'med';
     // Is current block?
     let isCurrent = false;
-    if (viewDay === today && item.time) {
-      const [hh,mm] = item.time.split(':').map(Number);
-      const blockH = hh + mm/60;
-      isCurrent = !checked && Math.abs(h - blockH) < 1.5 && h >= blockH - 0.1;
+    if (viewDay === today && item.start && item.end) {
+      isCurrent = !checked && isCurrentItem(item, h);
     }
     block.className = 'tblock' + (checked?' checked':'') + (isMed?' med-block':'') + (isCurrent&&!checked?' current':'');
     const checkHtml = `<div class="tblock-check">${checked?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>':''}</div>`;
     const tagHtml = item.tag && item.tag !== 'med' ? `<span class="tblock-tag">${item.tag}</span>` : '';
-    block.innerHTML = `${checkHtml}<div style="flex:1;"><div class="tblock-time">${item.time||'—'}</div><div class="tblock-name">${item.name}</div></div>${tagHtml}`;
+    block.innerHTML = `${checkHtml}<div style="flex:1;"><div class="tblock-time">${formatRange(item)}</div><div class="tblock-name">${item.name}</div></div>${tagHtml}`;
     block.onclick = () => {
       state.dailyChecks[viewDay][i] = !state.dailyChecks[viewDay][i];
       if (isMed) {
@@ -1155,6 +1296,7 @@ function renderTimeline() {
 // ===================== WEEK GRID =====================
 function renderWeek() {
   const grid = document.getElementById('weekGrid');
+  if (!grid) return;
   grid.innerHTML = '';
   const today = todayIdx();
   state.routines.forEach((tasks, i) => {
@@ -1174,7 +1316,7 @@ function renderWeek() {
         save(); renderWeek(); renderTimeline(); updateHero();
       };
       const sp = document.createElement('span');
-      sp.textContent = task.time ? task.time + ' ' + task.name.replace('💊 ','').replace('🐶 ','') : task.name.replace('💊 ','').replace('🐶 ','');
+      sp.textContent = formatRange(task) + ' ' + task.name.replace('💊 ','').replace('🐶 ','');
       label.appendChild(cb); label.appendChild(sp);
       div.appendChild(label);
     });
@@ -1187,7 +1329,7 @@ function renderWeek() {
       cb.checked = state.dailyChecks[i][j];
       cb.onchange = e => { state.dailyChecks[i][j] = e.target.checked; save(); renderWeek(); updateHero(); };
       const sp = document.createElement('span');
-      sp.textContent = (task.time ? task.time + ' ' : '') + task.name.replace('💊 ','').replace('🐶 ','').replace('🏃 ','');
+      sp.textContent = formatRange(task) + ' ' + task.name.replace('💊 ','').replace('🐶 ','').replace('🏃 ','');
       label.appendChild(cb); label.appendChild(sp);
     });
     // Re-render correctly
@@ -1200,7 +1342,7 @@ function renderWeek() {
       cb.onchange = e => { state.dailyChecks[i][j] = e.target.checked; if(task.tag==='med'){ state.medDays[i] = e.target.checked; } save(); renderWeek(); renderTimeline(); renderSwipeWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog(); };
       const sp = document.createElement('span');
       const tname = task.name.replace('💊 ','💊').replace('🐶 ','').replace('🏃 ','');
-      sp.textContent = (task.time ? task.time + ' ' : '') + tname.slice(0,18);
+      sp.textContent = (formatRange(task) + ' ' + tname).slice(0,24);
       label.appendChild(cb); label.appendChild(sp);
       div.appendChild(label);
     });
@@ -1322,6 +1464,130 @@ function toggleTask(id) {
 function deleteTask(id) {
   state.tasks = state.tasks.filter(t => t.id !== id);
   save(); renderTasks(); updateHero();
+}
+
+
+// ===================== RUTINAS RECURRENTES =====================
+let recurringDaysSelection = [true,true,true,true,true,false,false];
+
+function renderRecurringDaySelector() {
+  const wrap = document.getElementById('recDays');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  DAYS_SHORT.forEach((d, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'weekday-chip' + (recurringDaysSelection[i] ? ' active' : '');
+    btn.textContent = d;
+    btn.onclick = () => {
+      recurringDaysSelection[i] = !recurringDaysSelection[i];
+      renderRecurringDaySelector();
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function clearRecurringForm() {
+  const time = document.getElementById('recTime');
+  const name = document.getElementById('recName');
+  const tag = document.getElementById('recTag');
+  if (time) time.value = '';
+  if (name) name.value = '';
+  if (tag) tag.value = '';
+  recurringDaysSelection = [true,true,true,true,true,false,false];
+  renderRecurringDaySelector();
+}
+
+function normalizeRoutineName(name) {
+  return (name || '').trim().toLowerCase();
+}
+
+function applyRecurringTemplate(template) {
+  template.days.forEach(dayIdx => {
+    if (!state.routines[dayIdx]) state.routines[dayIdx] = [];
+    if (!state.dailyChecks[dayIdx]) state.dailyChecks[dayIdx] = [];
+    const exists = state.routines[dayIdx].some(item =>
+      (item.time || '') === (template.time || '') &&
+      normalizeRoutineName(item.name) === normalizeRoutineName(template.name) &&
+      (item.tag || '') === (template.tag || '')
+    );
+    if (!exists) {
+      state.routines[dayIdx].push({ time: template.time || '', name: template.name, tag: template.tag || '' });
+      state.dailyChecks[dayIdx].push(false);
+      const combined = state.routines[dayIdx].map((r, i) => ({ r, c: state.dailyChecks[dayIdx][i] }));
+      combined.sort((a, b) => {
+        if (!a.r.time) return 1;
+        if (!b.r.time) return -1;
+        return a.r.time.localeCompare(b.r.time);
+      });
+      state.routines[dayIdx] = combined.map(x => x.r);
+      state.dailyChecks[dayIdx] = combined.map(x => x.c);
+    }
+  });
+}
+
+function saveRecurringRoutine() {
+  const time = document.getElementById('recTime').value.trim();
+  const name = document.getElementById('recName').value.trim();
+  const tag = document.getElementById('recTag').value;
+  const days = recurringDaysSelection.map((v, i) => v ? i : null).filter(v => v !== null);
+  if (!name) { showToast('⚠️ Escribe el nombre del bloque recurrente'); return; }
+  if (!days.length) { showToast('⚠️ Elige al menos un día'); return; }
+  const template = { id: uid(), time, name, tag, days };
+  state.recurringTemplates.unshift(template);
+  applyRecurringTemplate(template);
+  save();
+  renderRecurringList();
+  clearRecurringForm();
+  refreshAll();
+  showToast('🔁 Rutina recurrente agregada');
+}
+
+function deleteRecurringRoutine(id) {
+  const tpl = state.recurringTemplates.find(t => t.id === id);
+  state.recurringTemplates = state.recurringTemplates.filter(t => t.id !== id);
+  if (tpl) {
+    tpl.days.forEach(dayIdx => {
+      const nextR = [];
+      const nextC = [];
+      state.routines[dayIdx].forEach((item, i) => {
+        const same = (item.time || '') === (tpl.time || '') && normalizeRoutineName(item.name) === normalizeRoutineName(tpl.name) && (item.tag || '') === (tpl.tag || '');
+        if (!same) { nextR.push(item); nextC.push(state.dailyChecks[dayIdx][i]); }
+      });
+      state.routines[dayIdx] = nextR;
+      state.dailyChecks[dayIdx] = nextC;
+    });
+  }
+  save(); renderRecurringList(); refreshAll();
+  showToast('Rutina recurrente eliminada');
+}
+
+function renderRecurringList() {
+  const list = document.getElementById('recurringList');
+  if (!list) return;
+  list.innerHTML = '';
+  if (!state.recurringTemplates.length) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:.85rem;padding:8px 2px;">Todavía no tienes rutinas recurrentes guardadas.</div>';
+    return;
+  }
+  state.recurringTemplates.forEach(tpl => {
+    const item = document.createElement('div');
+    item.className = 'recurring-item';
+    const daysHtml = tpl.days.map(i => `<span class="rec-day-mini">${DAYS_SHORT[i]}</span>`).join('');
+    const timeHtml = tpl.time ? `<span class="rec-chip active">${tpl.time}</span>` : '<span class="rec-chip">sin hora</span>';
+    const tagHtml = tpl.tag ? `<span class="rec-chip">${tpl.tag}</span>` : '';
+    item.innerHTML = `
+      <div class="recurring-head">
+        <div class="recurring-main">
+          <div class="recurring-title">${tpl.name}</div>
+          <div class="recurring-meta">${timeHtml}${tagHtml}</div>
+          <div class="rec-inline-days" style="margin-top:10px;">${daysHtml}</div>
+        </div>
+        <div class="rec-actions">
+          <button class="btn btn-ghost btn-sm" onclick="deleteRecurringRoutine('${tpl.id}')">Eliminar</button>
+        </div>
+      </div>`;
+    list.appendChild(item);
+  });
 }
 
 // ===================== CAPTURE =====================
@@ -1532,10 +1798,8 @@ function renderSwipeWeek() {
       const isFocus = item.tag === 'focus';
       const isStudy = item.tag === 'study';
       let isCurrent = false;
-      if (isToday && item.time) {
-        const [hh, mm] = item.time.split(':').map(Number);
-        const bh = hh + mm / 60;
-        isCurrent = !checked && h >= bh - 0.1 && h < bh + 1.5;
+      if (isToday && item.start && item.end) {
+        isCurrent = !checked && isCurrentItem(item, h);
       }
       const bl = document.createElement('div');
       bl.className = 'swipe-block' +
@@ -1548,7 +1812,7 @@ function renderSwipeWeek() {
       if (isMental) tagHtml = '<span class="sb-tag mental">salud mental</span>';
       else if (isFocus) tagHtml = '<span class="sb-tag focus">foco</span>';
       else if (isStudy) tagHtml = '<span class="sb-tag study">estudio</span>';
-      bl.innerHTML = `<div class="sb-chk">${chkSvg}</div><div class="sb-time">${item.time || '—'}</div><div class="sb-name">${item.name}</div>${tagHtml}`;
+      bl.innerHTML = `<div class="sb-chk">${chkSvg}</div><div class="sb-time">${formatRange(item)}</div><div class="sb-name">${item.name}</div>${tagHtml}`;
       bl.addEventListener('click', () => {
         state.dailyChecks[dayI][i] = !state.dailyChecks[dayI][i];
         if (isMed) {
@@ -1660,6 +1924,15 @@ function init() {
   renderStreak();
   renderMedLog();
   renderTasks();
+  renderWeekEditorQuickNav();
+  const startSel = document.getElementById('editNewStart');
+  const endSel = document.getElementById('editNewEnd');
+  if (startSel && endSel) {
+    startSel.innerHTML = timeOptionsHtml('09:00');
+    endSel.innerHTML = timeOptionsHtml('09:30');
+    startSel.value = '09:00';
+    endSel.value = '09:30';
+  }
   updateHero();
   updateWindowBar();
   loadMood();
@@ -1675,7 +1948,7 @@ function init() {
     Object.entries(state.weeklyCollapsed).forEach(([id, collapsed]) => {
       if (collapsed) {
         const sec = document.getElementById(id);
-        const arrowMap = {timelineSection:'timelineArrow', weekSection:'weekArrow', medSection:'medArrow', moveSection:'moveArrow', tasksSection:'tasksArrow'};
+        const arrowMap = {timelineSection:'timelineArrow', recurringSection:'recurringArrow', medSection:'medArrow', moveSection:'moveArrow', tasksSection:'tasksArrow'};
         if (sec) {
           sec.classList.add('hidden');
           sec.style.maxHeight = '0'; sec.style.opacity = '0';
@@ -1741,10 +2014,9 @@ function renderEditList() {
         <button class="edit-mv" onclick="moveBlock(${i},-1)" title="Subir">▲</button>
         <button class="edit-mv" onclick="moveBlock(${i},1)" title="Bajar">▼</button>
       </div>
-      <input class="edit-time-input" value="${item.time||''}" placeholder="--:--"
-        onchange="updateBlock(${i},'time',this.value)" maxlength="5">
-      <input class="edit-name-input" value="${item.name}" placeholder="Nombre..."
-        onchange="updateBlock(${i},'name',this.value)">
+      <select class="edit-time-input" onchange="updateBlock(${i},'start',this.value)">${timeOptionsHtml(item.start)}</select>
+      <select class="edit-time-input" onchange="updateBlock(${i},'end',this.value)">${timeOptionsHtml(item.end)}</select>
+      <input class="edit-name-input" value="${item.name}" placeholder="Nombre..." onchange="updateBlock(${i},'name',this.value)">
       <select class="edit-tag-sel" onchange="updateBlock(${i},'tag',this.value)">
         <option value="" ${!item.tag?'selected':''}>—</option>
         <option value="med" ${item.tag==='med'?'selected':''}>💊</option>
@@ -1760,7 +2032,15 @@ function renderEditList() {
 
 function updateBlock(i, field, value) {
   state.routines[editDay][i][field] = value;
-  save(); refreshAll();
+  if (field === 'start' && timeToMins(state.routines[editDay][i].end) <= timeToMins(value)) {
+    state.routines[editDay][i].end = nextHalfHour(value);
+  }
+  if (field === 'end' && timeToMins(value) <= timeToMins(state.routines[editDay][i].start)) {
+    showToast('⚠️ La hora de término debe ser después del inicio');
+    state.routines[editDay][i].end = nextHalfHour(state.routines[editDay][i].start);
+  }
+  sortDay(editDay);
+  save(); renderEditList(); refreshAll();
 }
 
 function moveBlock(i, dir) {
@@ -1781,28 +2061,25 @@ function deleteBlock(i) {
 }
 
 function addEditBlock() {
-  const time = document.getElementById('editNewTime').value.trim();
+  const start = document.getElementById('editNewStart').value || '09:00';
+  const end = document.getElementById('editNewEnd').value || nextHalfHour(start);
   const name = document.getElementById('editNewName').value.trim();
   const tag = document.getElementById('editNewTag').value;
   if (!name) { showToast('⚠️ Escribí el nombre del bloque'); return; }
-  state.routines[editDay].push({ time, name, tag });
+  if (timeToMins(end) <= timeToMins(start)) { showToast('⚠️ El término debe ser después del inicio'); return; }
+  state.routines[editDay].push({ start, end, name, tag });
   state.dailyChecks[editDay].push(false);
-  // Sort by time
-  const combined = state.routines[editDay].map((r, i) => ({ r, c: state.dailyChecks[editDay][i] }));
-  combined.sort((a, b) => {
-    if (!a.r.time) return 1; if (!b.r.time) return -1;
-    return a.r.time.localeCompare(b.r.time);
-  });
-  state.routines[editDay] = combined.map(x => x.r);
-  state.dailyChecks[editDay] = combined.map(x => x.c);
-  document.getElementById('editNewTime').value = '';
+  sortDay(editDay);
+  document.getElementById('editNewStart').value = '09:00';
+  document.getElementById('editNewEnd').value = '09:30';
   document.getElementById('editNewName').value = '';
   document.getElementById('editNewTag').value = '';
   save(); renderEditList(); refreshAll();
-  showToast('✅ Bloque agregado a ' + DAYS[editDay]);
+  showToast('✅ Actividad agregada a ' + DAYS[editDay]);
 }
 
 function refreshAll() {
+  ensureChecksMatch();
   renderSwipeWeek(); renderSwipeDots(); renderTimeline(); renderWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog();
 }
 
