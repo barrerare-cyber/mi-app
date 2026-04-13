@@ -53,19 +53,19 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px; gap: 12px;
+  padding: 10px 14px; gap: 10px;
 }
-.topbar-left { display: flex; align-items: center; gap: 14px; }
-.app-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: -.02em; }
+.topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.app-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: .98rem; letter-spacing: -.02em; line-height: 1; }
 .app-name span { color: var(--primary); }
 .day-badge {
   background: var(--primary-dim); color: var(--primary);
-  padding: 5px 12px; border-radius: 999px; font-size: .82rem; font-weight: 600;
+  padding: 5px 10px; border-radius: 999px; font-size: .76rem; font-weight: 700; white-space: nowrap;
 }
 .med-badge {
-  display: flex; align-items: center; gap: 7px;
-  padding: 6px 13px; border-radius: 999px; font-size: .82rem; font-weight: 600;
-  cursor: pointer; transition: .2s; border: none; font-family: inherit;
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 11px; border-radius: 999px; font-size: .78rem; font-weight: 700;
+  cursor: pointer; transition: .2s; border: none; font-family: inherit; white-space: nowrap; flex: 0 0 auto;
 }
 .med-badge.pending { background: var(--accent-dim); color: var(--accent); }
 .med-badge.done { background: var(--green-dim); color: var(--green); }
@@ -118,11 +118,11 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 .type-btn.active { border-color: var(--primary); color: var(--primary); background: var(--primary-dim); }
 
 /* LAYOUT */
-.main { max-width: 1120px; margin: 0 auto; padding: 22px 16px; display: grid; gap: 20px; }
-.two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.main { width: 100%; max-width: 860px; margin: 0 auto; padding: 18px 16px; display: grid; gap: 18px; }
+.two-col { display: grid; grid-template-columns: 1.28fr 1fr; gap: 18px; align-items: start; }
 .card {
   background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px;
+  border-radius: var(--radius); padding: 18px;
   box-shadow: var(--shadow);
 }
 .card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
@@ -132,22 +132,30 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
   text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
 }
 
+.today-card {
+  padding: 20px;
+  border: 1.5px solid #cdbdf8;
+  box-shadow: 0 10px 32px rgba(124,58,237,.12);
+}
+.today-card .card-title { font-size: 1.12rem; }
+.today-card .card-sub { font-size: .84rem; }
+
 /* HERO */
 .hero-card {
   background: linear-gradient(135deg, #ede9ff 0%, #f4f2ff 100%);
   border: 1px solid var(--primary-dim);
-  border-radius: var(--radius); padding: 22px;
-  display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+  border-radius: var(--radius); padding: 18px;
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; align-items: center;
 }
-.hero-greeting { font-size: 1.45rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.2; }
+.hero-greeting { font-size: 1.22rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; }
 .hero-greeting span { color: var(--primary); }
-.hero-sub { color: var(--muted); font-size: .88rem; margin-top: 6px; line-height: 1.45; }
-.hero-stats { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.hero-sub { color: var(--muted); font-size: .84rem; margin-top: 4px; line-height: 1.4; }
+.hero-stats { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 .hstat {
   background: var(--bg2); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 10px 14px; text-align: center; min-width: 70px;
+  border-radius: var(--radius-sm); padding: 8px 10px; text-align: center; min-width: 62px;
 }
-.hstat-num { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--primary); }
+.hstat-num { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--primary); }
 .hstat-label { font-size: .75rem; color: var(--muted); margin-top: 2px; }
 .progress-wrap { margin-top: 16px; }
 .progress-label { display: flex; justify-content: space-between; font-size: .82rem; color: var(--muted); margin-bottom: 7px; }
@@ -359,8 +367,17 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 }
 @media (max-width: 540px) {
   body { padding-bottom: 100px; }
+  .main { max-width: 100%; padding: 14px 12px; gap: 14px; }
+  .card { padding: 16px; }
   .week-grid { grid-template-columns: repeat(7,minmax(80px,1fr)); overflow-x: auto; }
-  .hero-card { grid-template-columns: 1fr; }
+  .hero-card { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
+  .hero-greeting { font-size: 1.08rem; }
+  .hero-stats { gap: 6px; }
+  .hstat { min-width: calc(50% - 3px); flex: 1 1 calc(50% - 3px); padding: 8px; }
+  .hstat-num { font-size: 1.02rem; }
+  .topbar { padding: 8px 10px; gap: 8px; }
+  .day-badge { padding: 4px 8px; font-size: .72rem; }
+  .med-badge { padding: 5px 9px; font-size: .72rem; }
   .timer-ring { display: none; }
   .timer-display { font-size: 2.5rem; }
 }
@@ -573,25 +590,6 @@ input[type="checkbox"] { cursor: pointer; }
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- SEMANA DESLIZABLE — VISTA PRINCIPAL -->
-<div class="main" style="padding-bottom:0;">
-  <div class="swipe-week" id="swipeWeek">
-    <div class="swipe-header">
-      <span class="swipe-header-title">📅 Tu semana</span>
-      <button class="swipe-today-btn" onclick="swipeGoToday()">Ir a hoy</button>
-    </div>
-    <div class="swipe-track-outer" id="swipeOuter">
-      <div class="swipe-track" id="swipeTrack"></div>
-    </div>
-    <div class="swipe-mood" id="swipeMoodBar"></div>
-    <div class="swipe-nav">
-      <button class="snav-btn" id="snavPrev" onclick="swipeMove(-1)">‹</button>
-      <div class="snav-dots" id="snavDots"></div>
-      <button class="snav-btn" id="snavNext" onclick="swipeMove(1)">›</button>
-    </div>
-  </div>
-</div>
-
 <!-- MAIN -->
 <div class="main">
 
@@ -628,24 +626,13 @@ input[type="checkbox"] { cursor: pointer; }
     </div>
   </div>
 
-  <!-- VENTANA DE FOCO -->
-  <div class="card">
-    <div class="section-label">ventana de medicamento</div>
-    <div class="window-bar" id="windowBar">
-      <div class="window-indicator" id="windowIndicator"></div>
-      <div class="window-text" id="windowText"><strong>Cargando...</strong></div>
-      <div class="window-status" id="windowStatus"></div>
-    </div>
-    <div class="card-sub" style="margin-bottom:0">El Samexid tarda ~30 min en hacer efecto. Tu pico de foco suele ser entre las 9:00 y las 13:00. Guardá las tareas difíciles para ese bloque.</div>
-  </div>
-
   <div class="two-col">
 
     <!-- COLUMNA IZQUIERDA -->
     <div style="display:grid;gap:20px;">
 
       <!-- TIMELINE HOY -->
-      <div class="card">
+      <div class="card today-card">
         <div class="section-toggle" onclick="toggleSection('timelineSection', 'timelineArrow')">
           <div>
             <div class="card-title">🕒 Tu día</div>
@@ -664,6 +651,23 @@ input[type="checkbox"] { cursor: pointer; }
         </div>
       </div>
 
+      <!-- SEMANA DESLIZABLE -->
+      <div class="swipe-week" id="swipeWeek">
+        <div class="swipe-header">
+          <span class="swipe-header-title">📅 Tu semana</span>
+          <button class="swipe-today-btn" onclick="swipeGoToday()">Ir a hoy</button>
+        </div>
+        <div class="swipe-track-outer" id="swipeOuter">
+          <div class="swipe-track" id="swipeTrack"></div>
+        </div>
+        <div class="swipe-mood" id="swipeMoodBar"></div>
+        <div class="swipe-nav">
+          <button class="snav-btn" id="snavPrev" onclick="swipeMove(-1)">‹</button>
+          <div class="snav-dots" id="snavDots"></div>
+          <button class="snav-btn" id="snavNext" onclick="swipeMove(1)">›</button>
+        </div>
+      </div>
+
       <!-- SEMANA -->
       <div class="card">
         <div class="section-toggle" onclick="toggleSection('weekSection', 'weekArrow')">
@@ -671,9 +675,9 @@ input[type="checkbox"] { cursor: pointer; }
             <div class="card-title">📅 Semana completa</div>
             <div class="card-sub">Vista global — tocá para marcar tareas.</div>
           </div>
-          <span class="toggle-arrow" id="weekArrow">▾</span>
+          <span class="toggle-arrow" id="weekArrow">▸</span>
         </div>
-        <div class="collapsible" id="weekSection" style="max-height:2000px;opacity:1;">
+        <div class="collapsible hidden" id="weekSection" style="max-height:0;opacity:0;">
           <div class="week-grid" id="weekGrid"></div>
         </div>
       </div>
@@ -717,9 +721,9 @@ input[type="checkbox"] { cursor: pointer; }
             <div class="card-title">💊 Medicamento</div>
             <div class="card-sub">Samexid 8:30am · racha y registro.</div>
           </div>
-          <span class="toggle-arrow" id="medArrow">▾</span>
+          <span class="toggle-arrow" id="medArrow">▸</span>
         </div>
-        <div class="collapsible" id="medSection" style="max-height:800px;opacity:1;">
+        <div class="collapsible hidden" id="medSection" style="max-height:0;opacity:0;">
           <div class="section-label" style="margin-top:4px;">racha últimos 7 días</div>
           <div class="streak-row" id="streakRow"></div>
           <div style="margin-top:14px;margin-bottom:10px;">
@@ -742,9 +746,9 @@ input[type="checkbox"] { cursor: pointer; }
             <div class="card-title">🐶 Movimiento</div>
             <div class="card-sub">Nada enorme. Solo no quedarse quieto.</div>
           </div>
-          <span class="toggle-arrow" id="moveArrow">▾</span>
+          <span class="toggle-arrow" id="moveArrow">▸</span>
         </div>
-        <div class="collapsible" id="moveSection" style="max-height:600px;opacity:1;">
+        <div class="collapsible hidden" id="moveSection" style="max-height:0;opacity:0;">
           <div id="moveGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:12px;"></div>
           <div style="font-size:.82rem;color:var(--muted);">Paseo del perro cuenta. Subir escaleras cuenta. Cualquier cosa que no sea estar sentado.</div>
         </div>
@@ -753,6 +757,18 @@ input[type="checkbox"] { cursor: pointer; }
     </div>
   </div>
 
+  <!-- VENTANA DE FOCO -->
+  <div class="card">
+    <div class="section-label">ventana de medicamento</div>
+    <div class="window-bar" id="windowBar">
+      <div class="window-indicator" id="windowIndicator"></div>
+      <div class="window-text" id="windowText"><strong>Cargando...</strong></div>
+      <div class="window-status" id="windowStatus"></div>
+    </div>
+    <div class="card-sub" style="margin-bottom:0">El Samexid tarda ~30 min en hacer efecto. Tu pico de foco suele ser entre las 9:00 y las 13:00. Guardá las tareas difíciles para ese bloque.</div>
+  </div>
+
+
   <!-- PENDIENTES FULL -->
   <div class="card">
     <div class="section-toggle" onclick="toggleSection('tasksSection','tasksArrow')">
@@ -760,9 +776,9 @@ input[type="checkbox"] { cursor: pointer; }
         <div class="card-title">📋 Todos los pendientes</div>
         <div class="card-sub">Capturá todo acá. Clasificá por energía para saber cuándo hacerlo.</div>
       </div>
-      <span class="toggle-arrow" id="tasksArrow">▾</span>
+      <span class="toggle-arrow" id="tasksArrow">▸</span>
     </div>
-    <div class="collapsible" id="tasksSection" style="max-height:3000px;opacity:1;">
+    <div class="collapsible hidden" id="tasksSection" style="max-height:0;opacity:0;">
       <div class="filter-row" id="filterRow">
         <button class="filt-btn active" data-filter="all" onclick="setFilter('all',this)">Todos</button>
         <button class="filt-btn" data-filter="hoy" onclick="setFilter('hoy',this)">📌 Hoy</button>
@@ -928,7 +944,13 @@ function defaultState() {
     timerSecs: 1500,
     timerRunning: false,
     timerDuration: 25,
-    weeklyCollapsed: {},
+    weeklyCollapsed: {
+      weekSection: true,
+      medSection: true,
+      moveSection: true,
+      tasksSection: true,
+      timelineSection: false
+    },
   };
 }
 
@@ -978,17 +1000,18 @@ function updateTopbar() {
 function toggleMed() {
   const idx = todayIdx();
   state.medDays[idx] = !state.medDays[idx];
+  const medCheckIdx = state.routines[idx].findIndex(r => r.tag === 'med');
   if (state.medDays[idx]) {
     const now = new Date();
     const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
     if (!state.medFeelings) state.medFeelings = {};
     if (!state.medFeelings[idx]) state.medFeelings[idx] = {time: timeStr, feeling: null};
     showToast('💊 Medicamento registrado a las ' + timeStr);
-    // Mark in daily checks too
-    const medCheckIdx = ROUTINES[idx].findIndex(r => r.tag === 'med');
     if (medCheckIdx >= 0) state.dailyChecks[idx][medCheckIdx] = true;
+  } else {
+    if (medCheckIdx >= 0) state.dailyChecks[idx][medCheckIdx] = false;
   }
-  save(); updateTopbar(); renderStreak(); renderMedLog(); renderTimeline(); renderWeek(); updateHero();
+  save(); updateTopbar(); renderStreak(); renderMedLog(); renderTimeline(); renderWeek(); renderSwipeWeek(); updateHero();
 }
 
 // ===================== MOOD =====================
@@ -1057,7 +1080,7 @@ function updateHero() {
   // Progress
   let total = 0, doneCount = 0;
   for (let i=0;i<7;i++) {
-    ROUTINES[i].forEach((_,j)=>{ total++; if(state.dailyChecks[i][j]) doneCount++; });
+    state.routines[i].forEach((_,j)=>{ total++; if(state.dailyChecks[i][j]) doneCount++; });
   }
   state.moveWeek.forEach(v=>{ total++; if(v) doneCount++; });
   const pct = total > 0 ? Math.round(doneCount/total*100) : 0;
@@ -1113,13 +1136,15 @@ function renderTimeline() {
     block.innerHTML = `${checkHtml}<div style="flex:1;"><div class="tblock-time">${item.time||'—'}</div><div class="tblock-name">${item.name}</div></div>${tagHtml}`;
     block.onclick = () => {
       state.dailyChecks[viewDay][i] = !state.dailyChecks[viewDay][i];
-      if (isMed && state.dailyChecks[viewDay][i]) {
-        state.medDays[viewDay] = true;
-        const now = new Date();
-        const ts = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-        if (!state.medFeelings) state.medFeelings = {};
-        if (!state.medFeelings[viewDay]) state.medFeelings[viewDay] = {time: ts, feeling: null};
-        showToast('💊 Medicamento registrado!');
+      if (isMed) {
+        state.medDays[viewDay] = state.dailyChecks[viewDay][i];
+        if (state.dailyChecks[viewDay][i]) {
+          const now = new Date();
+          const ts = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+          if (!state.medFeelings) state.medFeelings = {};
+          if (!state.medFeelings[viewDay]) state.medFeelings[viewDay] = {time: ts, feeling: null};
+          showToast('💊 Medicamento registrado!');
+        }
       }
       save(); renderTimeline(); renderWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog();
     };
@@ -1172,7 +1197,7 @@ function renderWeek() {
       label.className = 'wtask';
       const cb = document.createElement('input');
       cb.type = 'checkbox'; cb.checked = state.dailyChecks[i][j];
-      cb.onchange = e => { state.dailyChecks[i][j] = e.target.checked; save(); renderWeek(); updateHero(); if(task.tag==='med'){state.medDays[i]=e.target.checked;updateTopbar();renderStreak();renderMedLog();}};
+      cb.onchange = e => { state.dailyChecks[i][j] = e.target.checked; if(task.tag==='med'){ state.medDays[i] = e.target.checked; } save(); renderWeek(); renderTimeline(); renderSwipeWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog(); };
       const sp = document.createElement('span');
       const tname = task.name.replace('💊 ','💊').replace('🐶 ','').replace('🏃 ','');
       sp.textContent = (task.time ? task.time + ' ' : '') + tname.slice(0,18);
@@ -1476,7 +1501,7 @@ function renderSwipeWeek() {
   const today = todayIdx();
   const h = nowHour();
 
-  ROUTINES.forEach((blocks, dayI) => {
+  state.routines.forEach((blocks, dayI) => {
     const card = document.createElement('div');
     card.className = 'swipe-day-card';
     const done = state.dailyChecks[dayI].filter(Boolean).length;
@@ -1526,13 +1551,15 @@ function renderSwipeWeek() {
       bl.innerHTML = `<div class="sb-chk">${chkSvg}</div><div class="sb-time">${item.time || '—'}</div><div class="sb-name">${item.name}</div>${tagHtml}`;
       bl.addEventListener('click', () => {
         state.dailyChecks[dayI][i] = !state.dailyChecks[dayI][i];
-        if (isMed && state.dailyChecks[dayI][i]) {
-          state.medDays[dayI] = true;
-          const now = new Date();
-          const ts = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-          if (!state.medFeelings) state.medFeelings = {};
-          if (!state.medFeelings[dayI]) state.medFeelings[dayI] = { time: ts, feeling: null };
-          if (dayI === today) showToast('💊 Medicamento registrado!');
+        if (isMed) {
+          state.medDays[dayI] = state.dailyChecks[dayI][i];
+          if (state.dailyChecks[dayI][i]) {
+            const now = new Date();
+            const ts = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+            if (!state.medFeelings) state.medFeelings = {};
+            if (!state.medFeelings[dayI]) state.medFeelings[dayI] = { time: ts, feeling: null };
+            if (dayI === today) showToast('💊 Medicamento registrado!');
+          }
         }
         save(); renderSwipeWeek(); renderSwipeDots(); renderTimeline(); renderWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog();
       });
@@ -1611,10 +1638,23 @@ function swipeGoToday() {
 
 
 function init() {
+  // Weekly reset check
+  const wk = currentWeekKey();
+  if (state.lastWeek && state.lastWeek !== wk) {
+    state.dailyChecks = state.routines.map(d => d.map(() => false));
+    state.moveWeek = [false,false,false,false,false,false,false];
+    state.medDays = [false,false,false,false,false,false,false];
+    state.medFeelings = {};
+    state.mood = {};
+    showToast('🗓 Nueva semana. ¡Empezá de cero!');
+  }
+  state.lastWeek = wk;
+  save();
+
   updateTopbar();
-  renderSwipeWeek();
   renderDayNav();
   renderTimeline();
+  renderSwipeWeek();
   renderWeek();
   renderMoveGrid();
   renderStreak();
@@ -1647,19 +1687,6 @@ function init() {
   }
   // Update window bar every minute
   setInterval(updateWindowBar, 60000);
-  // Weekly reset check
-  const wk = currentWeekKey();
-  if (state.lastWeek && state.lastWeek !== wk) {
-    // New week: reset daily checks and move
-    state.dailyChecks = state.routines.map(d => d.map(() => false));
-    state.moveWeek = [false,false,false,false,false,false,false];
-    state.medDays = [false,false,false,false,false,false,false];
-    state.medFeelings = {};
-    state.mood = {};
-    showToast('🗓 Nueva semana. ¡Empezá de cero!');
-  }
-  state.lastWeek = wk;
-  save();
 
   // PWA manifest (iPhone)
   try {
@@ -1776,7 +1803,7 @@ function addEditBlock() {
 }
 
 function refreshAll() {
-  renderSwipeWeek(); renderSwipeDots(); renderTimeline(); renderWeek(); updateHero();
+  renderSwipeWeek(); renderSwipeDots(); renderTimeline(); renderWeek(); updateHero(); updateTopbar(); renderStreak(); renderMedLog();
 }
 
 </script>
